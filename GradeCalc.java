@@ -3,12 +3,14 @@ import java.util.*;
 
 public class GradeCalc{
     
+    // initializes ArrayLists to hold grades
     static ArrayList<Integer> PracticeProblems = new ArrayList<>();
     static ArrayList<Integer> Labs = new ArrayList<>();
     static ArrayList<Integer> Midterms = new ArrayList<>();
     static ArrayList<Integer> Final = new ArrayList<>();
 
     public static void main(String[] args) {
+        // initialize Scanner to read from keyboard inputs
         Scanner sc = new Scanner(System.in);
         int option = 0;
         
@@ -16,10 +18,11 @@ public class GradeCalc{
 
         do {
             System.out.println();
-            System.out.println("Please select an option: \n1. Practice Problems\n2. Labs\n3. Midterms\n4. Labs\n5. Total Grade\n6. Exit\n");
+            System.out.println("Please select an option: \n1. Practice Problems\n2. Labs\n3. Midterms\n4. Final\n5. Total Grade\n6. Exit\n");
             option = sc.nextInt();
 
             switch (option) {
+                // User inputs grades, get placed into PracticeProblems ArrayList
                 case 1: 
                     System.out.println("How many grades are you entering in?");
 
@@ -32,6 +35,8 @@ public class GradeCalc{
                         PracticeProblems.add(pgrade);
                     }
                     break;
+
+                // User inputs grades, get placed into Labs ArrayList
                 case 2: 
                     System.out.println("How many grades are you entering in?");
 
@@ -44,6 +49,8 @@ public class GradeCalc{
                         Labs.add(lgrade);
                     }
                     break;
+
+                // User inputs grades, get placed into Midterms ArrayList
                 case 3: 
                     System.out.println("How many grades are you entering in?");
 
@@ -56,6 +63,8 @@ public class GradeCalc{
                         Midterms.add(mgrade);
                     }
                     break;
+
+                // User inputs grades, get placed into Final ArrayList
                 case 4: 
                     System.out.println("How many grades are you entering in?");
 
@@ -68,11 +77,15 @@ public class GradeCalc{
                         Final.add(fgrade);
                     }
                     break;
+
+                // the actual 'calculator' portion of the code, sums up all ArrayLists into a total amount
+                // also tells user how many points needed in order to pass if total isn't a passing grade
                 case 5:
                     int psum = PracticeProblems.stream().mapToInt(Integer::intValue).sum();
                     int lsum = Labs.stream().mapToInt(Integer::intValue).sum();
                     int msum = Midterms.stream().mapToInt(Integer::intValue).sum();
                     int fsum = Final.stream().mapToInt(Integer::intValue).sum();
+                    int diff = 0;
 
                     int total = psum + lsum + msum + fsum;
                     System.out.println("Your total grade is: " + total);
@@ -84,13 +97,17 @@ public class GradeCalc{
                         System.out.println("Your letter grade is: C");
                     } else if (total <= 69 && total >= 60) {
                         System.out.println("Your letter grade is: D");
+                        diff = 70 - total;
+                        System.out.println("You need " + diff + " or more points in order to pass the course.");
                     } else {
                         System.out.println("Your letter grade is: F");
+                        diff = 70 - total;
+                        System.out.println("You need " + diff + " or more points in order to pass the course.");
                     }
-                    int diff = 70 - total;
-                    System.out.println("You need " + diff + " or more points in order to pass the course.");
+                    
                     System.out.println();
                     break;
+
                 case 6:
                     System.exit(0);
             }
